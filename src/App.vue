@@ -1,60 +1,43 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
+    <h1>ToDo Vue</h1>
+    <input type="text" v-model="newToDo" />
+    <button v-on:click="add()">Add</button>
     <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
+      <li style="list-style-type: none" v-for="(todo, i) in existingToDo">
+        {{ i + 1 }}: {{ todo.text }}
+        <button v-on:click="deleteToDo">X</button>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
-  data () {
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
+      newToDo: "",
+      existingToDo: [
+        { text: "Shopping", id: 1 },
+        { text: "Projects", id: 2 },
+      ],
+    };
+  },
+  methods: {
+    add() {
+      this.existingToDo.push({
+        text: this.newToDo,
+        id: new Date().valueOf(),
+      }),
+        (this.newToDo = "");
+    },
+    deleteToDo(i) {
+      console.log(i);
+      this.existingToDo.splice(i, 1);
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>
