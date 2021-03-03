@@ -6,7 +6,7 @@
     <ul>
       <li style="list-style-type: none" v-for="(todo, i) in existingToDo">
         {{ i + 1 }}: {{ todo.text }}
-        <button v-on:click="deleteToDo">X</button>
+        <button v-on:click="deleteToDo(i)">X</button>
       </li>
     </ul>
   </div>
