@@ -32,7 +32,6 @@ export default {
         (this.newToDo = "");
     },
     deleteToDo(i) {
-      console.log(i);
       this.existingToDo.splice(i, 1);
     },
   },
